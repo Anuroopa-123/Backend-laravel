@@ -3,6 +3,10 @@
 use App\Http\Controllers\HackathonController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MediaCategoryController;
+use App\Http\Controllers\MediaItemController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\WorkshopController;
 use \Illuminate\Http\Request;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Support\Facades\Route;
@@ -76,4 +80,36 @@ Route::middleware(['admin'])->group(function() {
     Route::get('/mediaCategories/edit/{id}', [MediaCategoryController::class, 'editForm'])->name('mediaCategories.editForm');
     Route::patch('/mediaCategories/edit/{id}', [MediaCategoryController::class, 'edit'])->name('mediaCategories.edit');
     Route::delete('/mediaCategories/delete/{id}', [MediaCategoryController::class, 'delete'])->name('mediaCategories.delete');
+
+    // MediaItems model routes
+    Route::get('/mediaItems/list',[MediaItemController::class, 'index'])->name('mediaItems.list');
+    Route::get('/mediaItems/create',[MediaItemController::class, 'create'])->name('mediaItems.create');
+    Route::post('/mediaItems/add',[MediaItemController::class, 'add'])->name('mediaItems.add');
+    Route::get('/mediaItems/edit/{id}', [MediaItemController::class, 'editForm'])->name('mediaItems.editForm');
+    Route::patch('/mediaItems/edit/{id}', [MediaItemController::class, 'edit'])->name('mediaItems.edit');
+    Route::delete('/mediaItems/delete/{id}', [MediaItemController::class, 'delete'])->name('mediaItems.delete');
+
+    // News model routes
+    Route::get('/news/list',[NewsController::class, 'index'])->name('news.list');
+    Route::get('/news/create',[NewsController::class, 'create'])->name('news.create');
+    Route::post('/news/add',[NewsController::class, 'add'])->name('news.add');
+    Route::get('/news/edit/{id}', [NewsController::class, 'editForm'])->name('news.editForm');
+    Route::patch('/news/edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
+    Route::delete('/news/delete/{id}', [NewsController::class, 'delete'])->name('news.delete');
+
+    // Sliders model routes
+    Route::get('/sliders/list',[SliderController::class, 'index'])->name('sliders.list');
+    Route::get('/sliders/create',[SliderController::class, 'create'])->name('sliders.create');
+    Route::post('/sliders/add',[SliderController::class, 'add'])->name('sliders.add');
+    Route::get('/sliders/edit/{id}', [SliderController::class, 'editForm'])->name('sliders.editForm');
+    Route::patch('/sliders/edit/{id}', [SliderController::class, 'edit'])->name('sliders.edit');
+    Route::delete('/sliders/delete/{id}', [SliderController::class, 'delete'])->name('sliders.delete');
+
+    // Workshop model routes
+    Route::get('/workshops/list',[WorkshopController::class, 'index'])->name('workshops.list');
+    Route::get('/workshops/create',[WorkshopController::class, 'create'])->name('workshops.create');
+    Route::post('/workshops/add',[WorkshopController::class, 'add'])->name('workshops.add');
+    Route::get('/workshops/edit/{id}', [WorkshopController::class, 'editForm'])->name('workshops.editForm');
+    Route::patch('/workshops/edit/{id}', [WorkshopController::class, 'edit'])->name('workshops.edit');
+    Route::delete('/workshops/delete/{id}', [WorkshopController::class, 'delete'])->name('workshops.delete');
 });

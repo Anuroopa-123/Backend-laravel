@@ -34,17 +34,22 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('mediaItems.list') }}" class="nav-link text-white">
                 <i class="bi bi-circle-fill"></i> Media Items
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('news.list') }}" class="nav-link text-white">
                 <i class="bi bi-circle-fill"></i> News
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('sliders.list') }}" class="nav-link text-white">
+                <i class="bi bi-circle-fill"></i> Sliders
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('workshops.list') }}" class="nav-link text-white">
                 <i class="bi bi-circle-fill"></i> Workshops
             </a>
         </li>

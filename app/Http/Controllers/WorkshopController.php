@@ -20,7 +20,27 @@ class WorkshopController extends Controller
 
     public function add(Request $request)
     {
-        
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif',
+            'is_published' => 'nullable|boolean'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $originalName = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('uploads/workshops');
+            $image->move($destinationPath, $originalName);
+            $imagePath = 'uploads/workshops/' . $originalName;
+        } else {
+            $imagePath = null;
+        }
+
+        Workshop::create([
+            'image' => $imagePath,
+            'is_published' => $request->has('is_published') ? 1 : 0
+        ]);
+
+        return redirect()->route('workshops.list')->with('success','Created!');
     }
 
     public function editForm($id)
@@ -29,13 +49,47 @@ class WorkshopController extends Controller
         return view('workshops.edit', compact('workshop'));
     }
 
-    public function edit()
+    public function edit(Request $request, $id)
     {
+        $request->validate([
+            'image' => 'nullable|mimes:jpg,png,jpeg,gif',
+            'is_published' => 'nullable|boolean'
+        ]);
 
+        $workshop = Workshop::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            if ($workshop->image && file_exists(public_path($workshop->image))) {
+                unlink(public_path($workshop->image));
+            }
+            $image = $request->file('image');
+            $originalName = time() . '_' . $image->getClientOriginalName();
+            $destinationPath = public_path('uploads/workshops');
+            $image->move($destinationPath, $originalName);
+            $imagePath = 'uploads/workshops/' . $originalName;
+        } else {
+            $imagePath = $workshop->image;
+        }
+
+        $workshop->update([
+            'image' => $imagePath,
+            'is_published' => $request->has('is_published') ? 1 : 0,
+            'category' => 'required|string',
+            'title' => 'required|string'
+        ]);
+
+        return redirect()->route('workshops.list')->with('success','Updated!');
     }
 
     public function delete($id)
     {
-        
+        $workshop = Workshop::findOrFail($id);
+        if ($workshop->image && file_exists(public_path($workshop->image))) {
+            unlink(public_path($workshop->image));
+        }
+
+        $workshop->delete();
+
+        return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
     }
 }
