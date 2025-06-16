@@ -16,7 +16,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Edit Hackathon hackathon</h4>
+                    <h4 class="mb-0">Edit Hackathon</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('hackathons.edit', $hackathon->id) }}" enctype="multipart/form-data">

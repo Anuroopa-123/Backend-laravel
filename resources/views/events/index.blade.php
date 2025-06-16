@@ -12,7 +12,7 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>Title</th>
+                <th>Events</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">

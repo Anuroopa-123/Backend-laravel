@@ -16,7 +16,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Edit Media Item</h4>
+                    <h4 class="mb-0">Create Media Item</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('mediaItems.add') }}" enctype="multipart/form-data">
