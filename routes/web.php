@@ -8,7 +8,6 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\WorkshopController;
 use \Illuminate\Http\Request;
-use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurshipController;
 use App\Http\Controllers\DashboardController;

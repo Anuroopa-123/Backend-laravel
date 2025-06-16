@@ -2,7 +2,6 @@
 
 @section('content')
 
-<!-- Example Bootstrap layout -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-9">
