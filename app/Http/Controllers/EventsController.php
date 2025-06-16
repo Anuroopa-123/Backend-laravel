@@ -106,6 +106,6 @@ class EventsController extends Controller
             unlink(public_path($event->image));
         }
 
-        return redirect()->route('events.list')->with('success', "Deleted event '{$id}'");
+        return response()->json(['success'=>true, 'message'=>'Deleted']);
     }
 }

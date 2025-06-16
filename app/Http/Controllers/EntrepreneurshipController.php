@@ -120,6 +120,6 @@ class EntrepreneurshipController extends Controller
 
         $entrepreneurship->delete();
 
-        return redirect()->route('entrepreneurship.list')->with('success', 'Deleted successfully!');
+        return response()->json(['success'=>true, 'message'=>'Deleted']);
     }
 }

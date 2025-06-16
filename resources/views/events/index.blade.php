@@ -18,10 +18,42 @@
         <tbody class="table-group-divider">
         @foreach($events as $event)
             <tr>
-                <td><a href="{{ route('events.editForm', $event->id) }}"><b>{{ $event->title }}</b></a></td>
+                <td class="flex justify-between">
+                    <a href="{{ route('events.editForm', $event->id) }}"><b>{{ $event->title }}</b></a>
+                    <button class="delete-btn" data-id="{{ $event->id }}">
+                        <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
+                    </button>
+                </td>
             </tr>
         @endforeach
         </tbody>
     </table>
 </div>
+@endsection
+
+@section('scripts')
+
+<script>
+document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        if(confirm('Are you sure you want to delete?')) {
+            fetch(`/events/delete/${this.dataset.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    location.reload();
+                } else {
+                    alert('Delete failed');
+                }
+            });
+        }
+    });
+});
+</script>
+
 @endsection

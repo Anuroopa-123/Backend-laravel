@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\CourseRegistrationController;
-use App\Http\Controllers\FrontendResourceController;
+use App\Http\Controllers\API\FrontendResourceController;
 use Illuminate\Support\Facades\Route;
 
 // All event API's

@@ -6,11 +6,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-9">
-      <!--Content-->
+      <h1>Workshop Poster</h1>
+      <img src="{{ url('/').'/'.$workshopPoster->image }}" alt="Workshop Poster">
     </div>
     <div class="col-md-3 d-flex flex-column align-items-end">
       <div class="timeline-container w-100">
-        <div class="main-timeline-5">
+        <div class="main-timeline-5 overflow-auto">
           @foreach ($timelines as $timeline)
             <div class="timeline-5 right-5 mb-4">
               <div class="card">
