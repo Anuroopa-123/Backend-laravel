@@ -19,7 +19,7 @@
         @foreach($sliders as $slider)
             <tr>
                 <td class="flex justify-between">
-                    <a href="{{ route('sliders.editForm', $slider->id) }}" class="link-underline-opacity-100"><b>{{ $slider->slider_title }}</b></a>
+                    <a href="{{ route('sliders.editForm', $slider->id) }}" class="link-underline-opacity-100"><b>Slider - {{ $slider->id }}</b></a>
                     <button class="delete-btn" data-id="{{ $slider->id }}">
                         <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
                     </button>

@@ -19,7 +19,7 @@
         @foreach($entrepreneurships as $entrepreneurship)
             <tr>
                 <td class="flex justify-between">
-                    <a href="{{ route('entrepreneurship.editForm', $entrepreneurship->id) }}"><b>{{ $entrepreneurship->course_title }}</b></a>
+                    <a href="{{ route('entrepreneurship.editForm', $entrepreneurship->id) }}"><b>Entrepreneurship - {{ $entrepreneurship->id }}</b></a>
                     <button class="delete-btn" data-id="{{ $entrepreneurship->id }}">
                         <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
                     </button>

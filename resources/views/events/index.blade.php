@@ -19,7 +19,7 @@
         @foreach($events as $event)
             <tr>
                 <td class="flex justify-between">
-                    <a href="{{ route('events.editForm', $event->id) }}"><b>{{ $event->title }}</b></a>
+                    <a href="{{ route('events.editForm', $event->id) }}"><b>Event - {{ $event->id }}</b></a>
                     <button class="delete-btn" data-id="{{ $event->id }}">
                         <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
                     </button>

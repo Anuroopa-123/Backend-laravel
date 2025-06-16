@@ -19,7 +19,7 @@
         @foreach($jobs as $job)
             <tr>
                 <td class="flex justify-between">
-                    <a href="{{ route('jobs.editForm', $job->id) }}" class="link-underline-opacity-100"><b>{{ $job->role }}</b></a>
+                    <a href="{{ route('jobs.editForm', $job->id) }}" class="link-underline-opacity-100"><b>Job - {{ $job->id }}</b></a>
                     <button class="delete-btn" data-id="{{ $job->id }}">
                         <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
                     </button>

@@ -19,7 +19,7 @@
         @foreach($mediaItems as $mediaItem)
             <tr>
                 <td class="flex justify-between">
-                    <a href="{{ route('mediaItems.editForm', $mediaItem->id) }}" class="link-underline-opacity-100"><b>{{ $mediaItem->category }}</b></a>
+                    <a href="{{ route('mediaItems.editForm', $mediaItem->id) }}" class="link-underline-opacity-100"><b>Media Item - {{ $mediaItem->id }}</b></a>
                     <button class="delete-btn" data-id="{{ $mediaItem->id }}">
                         <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
                     </button>

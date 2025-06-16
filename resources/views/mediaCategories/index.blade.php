@@ -19,7 +19,7 @@
         @foreach($mediaCategories as $mediaCategory)
             <tr>
                 <td class="flex justify-between">
-                    <a href="{{ route('mediaCategories.editForm', $mediaCategory->id) }}" class="link-underline-opacity-100"><b>{{ $mediaCategory->name }}</b></a>
+                    <a href="{{ route('mediaCategories.editForm', $mediaCategory->id) }}" class="link-underline-opacity-100"><b>Media Category - {{ $mediaCategory->id }}</b></a>
                     <button class="delete-btn" data-id="{{ $mediaCategory->id }}">
                         <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
                     </button>

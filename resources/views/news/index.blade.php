@@ -19,7 +19,7 @@
         @foreach($news as $newsItem)
             <tr>
                 <td class="flex justify-between">
-                    <a href="{{ route('news.editForm', $newsItem->id) }}" class="link-underline-opacity-100"><b>{{ $newsItem->description }}</b></a>
+                    <a href="{{ route('news.editForm', $newsItem->id) }}" class="link-underline-opacity-100"><b>News - {{ $newsItem->id }}</b></a>
                     <button class="delete-btn" data-id="{{ $newsItem->id }}">
                         <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
                     </button>
