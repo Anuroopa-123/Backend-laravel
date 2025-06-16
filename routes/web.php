@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\HackathonController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\MediaCategoryController;
 use \Illuminate\Http\Request;
+use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurshipController;
 use App\Http\Controllers\DashboardController;
@@ -57,4 +60,20 @@ Route::middleware(['admin'])->group(function() {
     Route::get('/hackathons/edit/{id}', [HackathonController::class, 'editForm'])->name('hackathons.editForm');
     Route::patch('/hackathons/edit/{id}', [HackathonController::class, 'edit'])->name('hackathons.edit');
     Route::delete('/hackathons/delete/{id}', [HackathonController::class, 'delete'])->name('hackathons.delete');
+
+    // Jobs model routes
+    Route::get('/jobs/list',[JobController::class, 'index'])->name('jobs.list');
+    Route::get('/jobs/create',[JobController::class, 'create'])->name('jobs.create');
+    Route::post('/jobs/add',[JobController::class, 'add'])->name('jobs.add');
+    Route::get('/jobs/edit/{id}', [JobController::class, 'editForm'])->name('jobs.editForm');
+    Route::patch('/jobs/edit/{id}', [JobController::class, 'edit'])->name('jobs.edit');
+    Route::delete('/jobs/delete/{id}', [JobController::class, 'delete'])->name('jobs.delete');
+
+    // MediaCategories model routes
+    Route::get('/mediaCategories/list',[MediaCategoryController::class, 'index'])->name('mediaCategories.list');
+    Route::get('/mediaCategories/create',[MediaCategoryController::class, 'create'])->name('mediaCategories.create');
+    Route::post('/mediaCategories/add',[MediaCategoryController::class, 'add'])->name('mediaCategories.add');
+    Route::get('/mediaCategories/edit/{id}', [MediaCategoryController::class, 'editForm'])->name('mediaCategories.editForm');
+    Route::patch('/mediaCategories/edit/{id}', [MediaCategoryController::class, 'edit'])->name('mediaCategories.edit');
+    Route::delete('/mediaCategories/delete/{id}', [MediaCategoryController::class, 'delete'])->name('mediaCategories.delete');
 });

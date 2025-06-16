@@ -24,12 +24,12 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('jobs.list') }}" class="nav-link text-white">
                 <i class="bi bi-circle-fill"></i> Jobs
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('mediaCategories.list') }}" class="nav-link text-white">
                 <i class="bi bi-circle-fill"></i> Media Categories
             </a>
         </li>
