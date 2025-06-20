@@ -12,11 +12,11 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <h3 class="mb-4">Admin Login</h3>
-                <form method="POST" action="{{ url('/login') }}">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" required autofocus>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required autofocus>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
