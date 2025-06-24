@@ -1,6 +1,7 @@
 <?php
-use App\Http\Controllers\CourseRegistrationController;
+use App\Http\Controllers\API\CourseRegistrationController;
 use App\Http\Controllers\API\FrontendResourceController;
+use App\Http\Controllers\API\JobapplicationController;
 use Illuminate\Support\Facades\Route;
 
 // All event API's
@@ -16,3 +17,6 @@ Route::get('/workshops',[FrontendResourceController::class, 'workshops']);
 
 // Course registration handling API
 Route::post('/course-registrations',[CourseRegistrationController::class, 'store']);
+
+// Job Applications
+Route::post('/job-applications',[JobapplicationController::class, 'store']);

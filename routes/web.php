@@ -1,44 +1,36 @@
 <?php
 
+use App\Http\Controllers\CourseRegistrationController;
 use App\Http\Controllers\HackathonController;
+use App\Http\Controllers\JobapplicationController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MediaCategoryController;
 use App\Http\Controllers\MediaItemController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkshopController;
-use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurshipController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventsController;
 
-Route::get('/login', function () { return view('auth.login'); })->name('login');
+Route::get('/login',[LoginController::class, 'showLoginForm'])->name('loginForm');
+Route::post('/login',[LoginController::class, 'login'])->name('login');
 
-Route::post('/login', function (Request $request) {
-    $request->validate([
-        'username' => 'required',
-        'password' => 'required',
-    ]);
-    if (
-        $request->username === env('ADMIN_USERNAME') &&
-        $request->password === env('ADMIN_PASSWORD')
-    ) {
-        session(['is_admin' => true]);
-        return redirect()->route('dashboard');
-    }
-    return back()->withErrors(['Invalid credentials']);
-});
-
-Route::post('/logout', function () {
-    session()->forget('is_admin');
-    return redirect()->route('login');
-})->name('logout');
+Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['admin'])->group(function() {
-
     // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // User related routes
+    Route::get('/users',[UserController::class,'index'])->name('users.show');
+    Route::get('/user/create',[UserController::class, 'create'])->name('users.create');
+    Route::post('/user/store',[UserController::class, 'store'])->name('users.store');
+    Route::get('/users/edit/{id}',[UserController::class, 'edit'])->name('users.edit');
+    Route::post('/user/update/{id}',[UserController::class, 'update'])->name('users.update');
 
     // Entrepreneurship model routes
     Route::get('/entrepreneurship/list', [EntrepreneurshipController::class, 'index'])->name('entrepreneurship.list');
@@ -111,4 +103,12 @@ Route::middleware(['admin'])->group(function() {
     Route::get('/workshops/edit/{id}', [WorkshopController::class, 'editForm'])->name('workshops.editForm');
     Route::patch('/workshops/edit/{id}', [WorkshopController::class, 'edit'])->name('workshops.edit');
     Route::delete('/workshops/delete/{id}', [WorkshopController::class, 'delete'])->name('workshops.delete');
+
+    // Job Application routes
+    Route::get('/jobApplications',[JobapplicationController::class, 'show'])->name('jobApps.show');
+    Route::get('/jobApplications/{id}/resume', [JobapplicationController::class, 'downloadResume']);
+    Route::post('/jobApplications/{id}/status', [JobapplicationController::class, 'updateStatus'])->name('jobApps.update');
+
+    // Course Registration routes
+    Route::get('/course-registrations',[CourseRegistrationController::class, 'show'])->name('courseRegs.show');
 });
