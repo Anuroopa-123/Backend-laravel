@@ -17,7 +17,7 @@ class JobapplicationController extends Controller
             'resume' => 'required|mimes:pdf'
         ]);
 
-        $resumePath = $request->file('resume')->store('resumes');
+        $resumePath = $request->file('resume')->storeAs('resumes',$request->file('resume')->getClientOriginalName());
 
         JobApplication::create([
             'name' => $request->name,
