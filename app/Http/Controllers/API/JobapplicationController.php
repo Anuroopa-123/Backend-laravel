@@ -26,6 +26,6 @@ class JobapplicationController extends Controller
             'resume' => $resumePath
         ]);
 
-        return response()->json(['success'=>true, 'message'=>'Posted Successfully!']);
+        return response()->json(['message'=>'Posted Successfully!']);
     }
 }
