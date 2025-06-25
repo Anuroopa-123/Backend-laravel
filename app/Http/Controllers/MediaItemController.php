@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use App\Models\MediaItem;
 use Illuminate\Http\Request;
 
@@ -37,12 +38,14 @@ class MediaItemController extends Controller
             $imagePath = null;
         }
 
-        MediaItem::create([
+        $mediaItem = MediaItem::create([
             'category' => $request->category,
             'image' => $imagePath,
             'title' => $request->title,
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
+
+        TimelineLog::log("Media Item - {$mediaItem->id}",'Created');
 
         return redirect()->route('mediaItems.list')->with('success','Created!');
     }
@@ -84,6 +87,8 @@ class MediaItemController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
 
+        TimelineLog::log("Media Item - {$mediaItem->id}",'Updated');
+
         return redirect()->route('mediaItems.list')->with('success','Updated!');
     }
 
@@ -95,6 +100,8 @@ class MediaItemController extends Controller
         }
 
         $mediaItem->delete();
+
+        TimelineLog::log("Media Item - {$mediaItem->id}",'Deleted');
 
         return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
     }

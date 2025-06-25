@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -36,11 +37,13 @@ class SliderController extends Controller
             $imagePath = null;
         }
 
-        Slider::create([
+        $slider = Slider::create([
             'slider_image' => $imagePath,
             'slider_title' => $request->slider_title,
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
+
+        TimelineLog::log("Slider - {$slider->id}",'Created');
 
         return redirect()->route('sliders.list')->with('success','Created!');
     }
@@ -80,6 +83,8 @@ class SliderController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
 
+        TimelineLog::log("Slider - {$slider->id}",'Updated');
+
         return redirect()->route('sliders.list')->with('success','Updated!');
     }
 
@@ -91,6 +96,8 @@ class SliderController extends Controller
         }
 
         $slider->delete();
+
+        TimelineLog::log("Slider - {$slider->id}",'Deleted');
 
         return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
     }

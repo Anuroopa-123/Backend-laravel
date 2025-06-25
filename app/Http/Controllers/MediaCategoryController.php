@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use App\Models\MediaCategory;
 use Illuminate\Http\Request;
 
@@ -26,11 +27,13 @@ class MediaCategoryController extends Controller
             'is_published' => 'nullable|boolean'
         ]);
 
-        MediaCategory::create([
+        $mediaCategory = MediaCategory::create([
             'name' => $request->name,
             'description' => $request->description,
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
+        
+        TimelineLog::log("Media Category - {$mediaCategory->id}",'Created');
 
         return redirect()->route('mediaCategories.list')->with('success',"Created!");
     }
@@ -57,6 +60,8 @@ class MediaCategoryController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0,
         ]);
 
+        TimelineLog::log("Media Category - {$mediaCategory->id}",'Updated');
+
         return redirect()->route('mediaCategories.list')->with('success', "Updated!");
     }
 
@@ -64,6 +69,8 @@ class MediaCategoryController extends Controller
     {
         $mediaCategory = MediaCategory::findOrFail($id);
         $mediaCategory->delete();
+
+        TimelineLog::log("Media Category - {$mediaCategory->id}",'Deleted');
 
         return response()->json(['success'=>true, 'message'=>'Deleted']);
     }

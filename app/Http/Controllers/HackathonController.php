@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use App\Models\Hackathon;
 use Illuminate\Http\Request;
 
@@ -56,6 +57,8 @@ class HackathonController extends Controller
                 $hackathon->images()->create(['image_path' => $galleryPath]);
             }
         }
+
+        TimelineLog::log("Hackathon - {$hackathon->id}",'Created');
 
         return redirect()->route('hackathons.list')->with('success',"Created successfully");
     }
@@ -117,6 +120,8 @@ class HackathonController extends Controller
             }
         }
 
+        TimelineLog::log("Hackathon - {$event->id}",'Updated');
+
         return redirect()->route('hackathons.list')->with('success', 'Updated!');
     }
 
@@ -128,6 +133,8 @@ class HackathonController extends Controller
         }
 
         $hackathon->delete();
+
+        TimelineLog::log("Hackathon - {$hackathon->id}",'Deleted');
 
         return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
     }

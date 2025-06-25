@@ -52,13 +52,7 @@ class EventsController extends Controller
 
         TimelineLog::log("Event - {$event->id}", 'Created');
 
-        if ($request->has('add_another')) {
-            return redirect()->route('events.create')->with('success', 'Event updated! You can add another.');
-        } elseif ($request->has('continue_editing')) {
-            return redirect()->route('events.edit', $event->id)->with('success', 'Event updated! Continue editing.');
-        } else {
-            return redirect()->route('events.list')->with('success', 'Event updated!');
-        }
+        return redirect()->route('events.list')->with('success', 'Updated successfully!');
     }
 
     public function editForm($id)
@@ -103,15 +97,7 @@ class EventsController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0,
         ]);
 
-        TimelineLog::log("Event - {$event->id}", 'Updated');
-
-        if ($request->has('add_another')) {
-            return redirect()->route('events.create')->with('success', 'Event updated! You can add another.');
-        } elseif ($request->has('continue_editing')) {
-            return redirect()->route('events.edit', $event->id)->with('success', 'Event updated! Continue editing.');
-        } else {
-            return redirect()->route('events.list')->with('success', 'Event updated!');
-        }
+        return redirect()->route('events.list')->with('success', 'Updated successfully!');
     }
 
     public function delete($id)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use App\Models\Workshop;
 use Illuminate\Http\Request;
 
@@ -35,10 +36,12 @@ class WorkshopController extends Controller
             $imagePath = null;
         }
 
-        Workshop::create([
+        $workshop = Workshop::create([
             'image' => $imagePath,
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
+
+        TimelineLog::log("Workshop - {$workshop->id}",'Created');
 
         return redirect()->route('workshops.list')->with('success','Created!');
     }
@@ -76,6 +79,8 @@ class WorkshopController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0,
         ]);
 
+        TimelineLog::log("Workshop - {$workshop->id}",'Updated');
+
         return redirect()->route('workshops.list')->with('success','Updated!');
     }
 
@@ -87,6 +92,8 @@ class WorkshopController extends Controller
         }
 
         $workshop->delete();
+
+        TimelineLog::log("Workshop - {$workshop->id}",'Deleted');
 
         return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
     }

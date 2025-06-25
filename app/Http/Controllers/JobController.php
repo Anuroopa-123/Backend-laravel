@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use App\Models\Job;
 use Illuminate\Http\Request;
 
@@ -27,13 +28,15 @@ class JobController extends Controller
             'is_published' => 'nullable|boolean'
         ]);
 
-        Job::create([
+        $job = Job::create([
             'role' => $request->role,
             'description' => $request->description,
             'posted_on' => $request->posted_on,
             'type' => $request->type,
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
+
+        TimelineLog::log("Job - {$job->id}",'Created');
 
         return redirect()->route('jobs.list')->with('success',"Created successfully");
     }
@@ -65,6 +68,8 @@ class JobController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
 
+        TimelineLog::log("Job - {$job->id}",'Updated');
+
         return redirect()->route('jobs.list')->with('success', 'Updated!');
     }
 
@@ -73,6 +78,8 @@ class JobController extends Controller
         $job = Job::findOrFail($id);
 
         $job->delete();
+
+        TimelineLog::log("Job - {$job->id}",'Deleted');
 
         return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
     }

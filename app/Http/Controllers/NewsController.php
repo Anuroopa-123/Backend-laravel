@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -37,12 +38,14 @@ class NewsController extends Controller
             $imagePath = null;
         }
 
-        News::create([
+        $news = News::create([
             'news_image' => $imagePath,
             'description' => $request->description,
             'date' => $request->date,
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
+
+        TimelineLog::log("News - {$news->id}",'Created');
 
         return redirect()->route('news.list')->with('success','Created!');
     }
@@ -84,6 +87,8 @@ class NewsController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
 
+        TimelineLog::log("News - {$news->id}",'Updated');
+
         return redirect()->route('news.list')->with('success','Updated!');
     }
 
@@ -95,6 +100,8 @@ class NewsController extends Controller
         }
 
         $news->delete();
+
+        TimelineLog::log("News - {$news->id}",'Deleted');
 
         return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
     }
