@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TimelineLog;
 use Illuminate\Http\Request;
 use App\Models\Event;
 
@@ -40,7 +41,7 @@ class EventsController extends Controller
         }
 
         // Create Record
-        Event::create([
+        $event = Event::create([
             'title' => $request->title,
             'description' => $request->description,
             'date' => $request->date,
@@ -49,7 +50,15 @@ class EventsController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0,
         ]);
 
-        return redirect()->route('events.list')->with('success', 'Created!');
+        TimelineLog::log("Event - {$event->id}", 'Created');
+
+        if ($request->has('add_another')) {
+            return redirect()->route('events.create')->with('success', 'Event updated! You can add another.');
+        } elseif ($request->has('continue_editing')) {
+            return redirect()->route('events.edit', $event->id)->with('success', 'Event updated! Continue editing.');
+        } else {
+            return redirect()->route('events.list')->with('success', 'Event updated!');
+        }
     }
 
     public function editForm($id)
@@ -94,7 +103,15 @@ class EventsController extends Controller
             'is_published' => $request->has('is_published') ? 1 : 0,
         ]);
 
-        return redirect()->route('events.list')->with('success', 'Updated!');
+        TimelineLog::log("Event - {$event->id}", 'Updated');
+
+        if ($request->has('add_another')) {
+            return redirect()->route('events.create')->with('success', 'Event updated! You can add another.');
+        } elseif ($request->has('continue_editing')) {
+            return redirect()->route('events.edit', $event->id)->with('success', 'Event updated! Continue editing.');
+        } else {
+            return redirect()->route('events.list')->with('success', 'Event updated!');
+        }
     }
 
     public function delete($id)
@@ -105,6 +122,8 @@ class EventsController extends Controller
         if($event->image && file_exists(public_path($event->image))) {
             unlink(public_path($event->image));
         }
+
+        TimelineLog::log("Event - {$event->id}", 'Deleted');
 
         return response()->json(['success'=>true, 'message'=>'Deleted']);
     }

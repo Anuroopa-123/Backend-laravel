@@ -12,6 +12,10 @@ class Hackathon extends Model
         'date',
         'image',
         'is_published',
-        'font_style',
     ];
+
+    public function showcaseImages()
+    {
+        return $this->hasMany(HackathonImage::class,'hackathon_id','id');
+    }
 }

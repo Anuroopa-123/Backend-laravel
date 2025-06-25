@@ -74,8 +74,6 @@ class WorkshopController extends Controller
         $workshop->update([
             'image' => $imagePath,
             'is_published' => $request->has('is_published') ? 1 : 0,
-            'category' => 'required|string',
-            'title' => 'required|string'
         ]);
 
         return redirect()->route('workshops.list')->with('success','Updated!');

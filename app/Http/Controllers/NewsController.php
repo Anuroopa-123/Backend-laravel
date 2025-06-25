@@ -74,13 +74,13 @@ class NewsController extends Controller
             $image->move($destinationPath, $originalName);
             $imagePath = 'uploads/news/' . $originalName;
         } else {
-            $imagePath = $news->image;
+            $imagePath = $news->news_image;
         }
 
         $news->update([
-            'category' => $request->category,
-            'image' => $imagePath,
-            'title' => $request->title,
+            'news_image' => $imagePath,
+            'description' => $request->description,
+            'date' => $request->date,
             'is_published' => $request->has('is_published') ? 1 : 0
         ]);
 

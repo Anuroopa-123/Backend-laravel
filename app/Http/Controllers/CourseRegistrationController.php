@@ -2,52 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use DB;
-use Illuminate\Http\Request;
 use App\Models\CourseRegistration;
+use Illuminate\Http\Request;
 
 class CourseRegistrationController extends Controller
 {
-    // Handle course data from form and show to admin
-    public function index()
+    public function show()
     {
-        $registrations = CourseRegistration::orderByDesc('created_at')->paginate(10);
-        return view('course_registrations',compact('registrations'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'dob' => 'required|date',
-            'mobile_number' => 'required|string',
-            'email' => 'required|string',
-            'address_line_one' => 'required|string',
-            'address_line_two' => 'required|string',
-            'city' => 'required|string',
-            'state' => 'required|string',
-            'zip_code' => 'required|string',
-            'college_organization' => 'required|string',
-            'department_domain' => 'required|string',
-            'year_experience' => 'required|string',
-        ]);
-
-        CourseRegistration::create([
-            'name' => $request->name,
-            'dob' => $request->dob,
-            'mobile_number' => $request->mobile_number,
-            'email' => $request->email,
-            'address_line_one' => $request->address_line_one,
-            'address_line_two' => $request->address_line_two,
-            'city' => $request->city,
-            'state' => $request->state,
-            'zip_code' => $request->zip_code,
-            'college_organization' => $request->college_organization,
-            'department_domain' => $request->department_domain,
-            'year_experience' => $request->year_experience,
-        ]);
-
-        return response()->json(['success' => true],200);
+        $courseRegs = CourseRegistration::all();
+        return view('courseRegs.index',compact('courseRegs'));
     }
 }

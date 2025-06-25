@@ -25,8 +25,8 @@ class HackathonController extends Controller
             'description' => 'required|string',
             'date' => 'required|date',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,png,jpeg,gif',
             'is_published' => 'nullable|boolean',
-            'font_style' => 'required|string'
         ]);
 
         if ($request->hasFile('image')) {
@@ -39,14 +39,23 @@ class HackathonController extends Controller
             $imagePath = null;
         }
 
-        Hackathon::create([
+        $hackathon = Hackathon::create([
             'title' => $request->title,
             'description' => $request->description,
             'date' => $request->date,
             'image' => $imagePath,
             'is_published' => $request->has('is_published') ? 1 : 0,
-            'font_style' => $request->font_style,
         ]);
+
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $galleryImage) {
+                $galleryName = time() . '_' . $galleryImage->getClientOriginalName();
+                $galleryDestination = public_path('uploads/hackathons/gallery');
+                $galleryImage->move($galleryDestination, $galleryName);
+                $galleryPath = 'uploads/hackathons/gallery/' . $galleryName;
+                $hackathon->images()->create(['image_path' => $galleryPath]);
+            }
+        }
 
         return redirect()->route('hackathons.list')->with('success',"Created successfully");
     }
@@ -64,8 +73,8 @@ class HackathonController extends Controller
             'description' => 'required|string',
             'date' => 'required|date',
             'image' => 'nullable|mimes:jpg,png,jpeg,gif',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,png,jpeg,gif',
             'is_published' => 'nullable|boolean',
-            'font_style' => 'required|string'
         ]);
 
         // Edit Record
@@ -90,8 +99,23 @@ class HackathonController extends Controller
             'date' => $request->date,
             'image' => $imagePath,
             'is_published' => $request->has('is_published') ? 1 : 0,
-            'font_style' => $request->font_style
         ]);
+
+        if ($request->hasFile('gallery_images')) {
+            foreach ($event->showcaseImages as $images) {
+                if($images && file_exists(public_path($images->image_path))) {
+                    unlink(public_path($images->image_path));
+                }
+                $images->delete();
+            }
+            foreach ($request->file('gallery_images') as $galleryImage) {
+                $galleryName = time() . '_' . $galleryImage->getClientOriginalName();
+                $galleryDestination = public_path('uploads/hackathons/gallery');
+                $galleryImage->move($galleryDestination, $galleryName);
+                $galleryPath = 'uploads/hackathons/gallery/' . $galleryName;
+                $event->showcaseImages()->create(['image_path' => $galleryPath]);
+            }
+        }
 
         return redirect()->route('hackathons.list')->with('success', 'Updated!');
     }

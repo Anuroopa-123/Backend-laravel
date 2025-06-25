@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/tansam-styles.css') }}">
     <link rel="icon" href="{{ asset('tansam_logo.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.tiny.cloud/1/{{ env('TINY_MCE_API_KEY') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <x-head.tinymce-config/>
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-light bg-dark d-lg-none">

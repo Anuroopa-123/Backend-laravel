@@ -41,11 +41,11 @@
             <label class="form-label fw-bold">Gallery Images (Supported Types: JPG, PNG, JPEG, GIF)</label>
             <input type="file" name="gallery_images[]" class="form-control" multiple>
             <div class="form-text">You can select multiple images for the event gallery.</div>
-            @if(isset($hackathon) && $hackathon->images && $hackathon->images->count())
+            @if(isset($hackathon) && $hackathon->showcaseImages && $hackathon->showcaseImages->count())
                 <div class="mt-2">
                     <strong>Current Gallery:</strong>
                     <div class="d-flex flex-wrap gap-2 mt-1">
-                        @foreach($hackathon->images as $img)
+                        @foreach($hackathon->showcaseImages as $img)
                             <div>
                                 <img src="{{ asset($img->image_path) }}" alt="Gallery Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
                             </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold">Description *</label>
-            <textarea name="description" id="editor" class="form-control" rows="6">{{ old('description', $hackathon->description ?? '') }}</textarea>
+            <x-forms.tinymce-editor content="{{ $hackathon->description }}"/>
         </div>
         <div class="published d-flex align-items-center justify-content-center mb-4" style="gap: 1rem;">
             <span class="fw-bold" style="font-size: 1.1rem;">
@@ -86,14 +86,6 @@
 
 @section('scripts')
 <script>
-  tinymce.init({
-    selector: 'textarea#editor',
-    skin: 'bootstrap',
-    plugins: 'lists, link, image, media',
-    toolbar: 'h1 h2 bold italic strikethrough fontfamily blockquote bullist numlist backcolor | link image media | removeformat help',
-    menubar: false,
-    height: 300
-  });
   document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('is_published_checkbox');
     const status = document.getElementById('publish-status');

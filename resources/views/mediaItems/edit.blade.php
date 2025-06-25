@@ -20,20 +20,14 @@
             <label class="form-label fw-bold">Title *</label>
             <input name="title" type="text" value="{{ old('title', $mediaItem->title) }}" required class="form-control">
         </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Category *</label>
-                <select name="category" class="form-control" required>
-                    <option value="">-----</option>
-                    <option value="Events" {{ old('category',$mediaItem->category) == 'Events' ? 'selected' : '' }}>Events</option>
-                    <option value="Print Media" {{ old('category',$mediaItem->category) == 'Print Media' ? 'selected' : '' }}>Print Media</option>
-                    <option value="LinkedIn" {{ old('category',$mediaItem->category) == 'LinkedIn' ? 'selected' : '' }}>LinkedIn</option>
-                </select>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Date *</label>
-                <input name="date" type="date" value="{{ old('date', $mediaItem->date) }}" required class="form-control">
-            </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Category *</label>
+            <select name="category" class="form-control" required>
+                <option value="">-----</option>
+                <option value="Events" {{ old('category',$mediaItem->category) == 'Events' ? 'selected' : '' }}>Events</option>
+                <option value="Print Media" {{ old('category',$mediaItem->category) == 'Print Media' ? 'selected' : '' }}>Print Media</option>
+                <option value="LinkedIn" {{ old('category',$mediaItem->category) == 'LinkedIn' ? 'selected' : '' }}>LinkedIn</option>
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold">Image (Supported Types: JPG, PNG, JPEG, GIF)</label>

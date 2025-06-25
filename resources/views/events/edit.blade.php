@@ -53,7 +53,7 @@
 
     <div class="mb-3">
         <label class="form-label fw-bold">Description *</label>
-        <textarea name="description" id="editor" class="form-control" rows="6">{{ old('description', $event->description) }}</textarea>
+        <x-forms.tinymce-editor content="{{ $event->description }}"/>
     </div>
 
     <div class="published d-flex align-items-center justify-content-center mb-4" style="gap: 1rem;">
@@ -85,16 +85,7 @@
 
 @section('scripts')
 <script>
-  tinymce.init({
-    selector: 'textarea#editor',
-    skin: 'bootstrap',
-    plugins: 'lists, link, image, media',
-    toolbar: 'h1 h2 bold italic fontfamily strikethrough blockquote bullist numlist forecolor | link image media | removeformat',
-    menubar: false,
-    height: 300
-  });
-
-  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('is_published_checkbox');
     const status = document.getElementById('publish-status');
     function updateStatus() {
@@ -103,6 +94,6 @@
     }
     checkbox.addEventListener('change', updateStatus);
     updateStatus();
-  });
+    });
 </script>
 @endsection

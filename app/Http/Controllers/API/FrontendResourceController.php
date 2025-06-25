@@ -29,7 +29,7 @@ class FrontendResourceController extends Controller
 
     public function hackathons()
     {
-        $result = Hackathon::all()->toArray();
+        $result = Hackathon::with('showcaseImages')->get();
         return $result;
     }
 

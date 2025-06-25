@@ -15,7 +15,7 @@
     <h4 class="mb-5">Edit News</h4>
     <form method="POST" action="{{ route('news.edit', $news->id) }}" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
+        @method('PATCH')
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Date *</label>
@@ -26,7 +26,7 @@
                 <input type="file" name="news_image" class="form-control" accept="image/*">
                 <div class="form-text">Leave blank to keep current image.
                     @if($news->news_image)
-                        <a href="{{ asset('uploads/news/' . $news->news_image) }}" target="_blank" rel="noopener" class="link-primary text-decoration-underline">
+                        <a href="{{ asset($news->news_image) }}" target="_blank" rel="noopener" class="link-primary text-decoration-underline">
                             View current image
                         </a>
                     @endif
@@ -35,7 +35,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold">Description *</label>
-            <textarea name="description" id="editor" class="form-control" rows="6">{{ old('description', $news->description) }}</textarea>
+            <x-forms.tinymce-editor content="{{ $news->description }}"/>
         </div>
         <div class="published d-flex align-items-center justify-content-center mb-4" style="gap: 1rem;">
             <span class="fw-bold" style="font-size: 1.1rem;">
@@ -54,7 +54,7 @@
             </label>
         </div>
         <div class="d-flex gap-2 justify-content-center">
-            <button class="btn btn-success">Update</button>
+            <button type="submit" class="btn btn-success">Save</button>
             <a href="{{ route('news.list') }}" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
@@ -63,14 +63,6 @@
 
 @section('scripts')
 <script>
-  tinymce.init({
-    selector: 'textarea#editor',
-    skin: 'bootstrap',
-    plugins: 'lists, link, image, media',
-    toolbar: 'h1 h2 bold italic strikethrough fontfamily blockquote bullist numlist backcolor | link image media | removeformat help',
-    menubar: false,
-    height: 300
-  });
   document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('is_published_checkbox');
     const status = document.getElementById('publish-status');
