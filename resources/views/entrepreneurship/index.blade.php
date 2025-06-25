@@ -2,26 +2,38 @@
 
 @section('content')
 <div class="container">
-    <div class="top-section d-flex justify-content-between pt-3 pb-3">
-        <h2>Entrepreneurship Events</h2>
-        <a href="{{ route('entrepreneurship.create') }}" class="btn btn-primary mb-3">Add New</a>
+    <div class="top-section d-flex justify-content-between align-items-center pt-3 pb-3">
+        <div>
+            <h2 class="mb-0">Entrepreneurship Events</h2>
+            <div class="text-muted" style="font-size: 1rem;">Manage all entrepreneurship events from here.</div>
+        </div>
+        <a href="{{ route('entrepreneurship.create') }}" class="btn btn-primary mb-3 d-flex align-items-center gap-2">
+            <i class="bi bi-plus-circle" style="font-size: 1.2rem;"></i> Add New
+        </a>
     </div>
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                <th>Entrepreneurships</th>
+                <th class="align-middle">Event</th>
+                <th style="width: 80px;" class="align-middle text-center">Actions</th>
             </tr>
         </thead>
-        <tbody class="table-group-divider">
+        <tbody>
         @foreach($entrepreneurships as $entrepreneurship)
             <tr>
-                <td class="flex justify-between">
-                    <a href="{{ route('entrepreneurship.editForm', $entrepreneurship->id) }}"><b>Entrepreneurship - {{ $entrepreneurship->id }}</b></a>
-                    <button class="delete-btn" data-id="{{ $entrepreneurship->id }}">
-                        <i class="bi bi-trash3-fill text-red-500 mr-2"></i>
+                <td class="align-middle">
+                    <a href="{{ route('entrepreneurship.editForm', $entrepreneurship->id) }}"
+                       class="text-decoration-none fw-semibold"
+                       style="color:var(--tansam-bg); font-size:1.08rem;">
+                        Entrepreneurship - {{ $entrepreneurship->id }}
+                    </a>
+                </td>
+                <td class="align-middle text-center">
+                    <button class="delete-btn btn btn-link p-0" data-id="{{ $entrepreneurship->id }}" title="Delete" style="color: red;">
+                        <i class="bi bi-trash3-fill" style="font-size:1.2rem;"></i>
                     </button>
                 </td>
             </tr>

@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf=token" content="{{ csrf_token() }}">
-    <title>TANSAM</title>
+    <title>TANSAM CMS</title>
+    <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tansam-styles.css') }}">
+    <link rel="icon" href="{{ asset('tansam_logo.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tiny.cloud/1/{{ env('TINY_MCE_API_KEY') }}/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body class="bg-light">
-    <!-- Hamburger for mobile -->
     <nav class="navbar navbar-light bg-dark d-lg-none">
         <div class="container-fluid">
             <button class="btn btn-dark rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
@@ -19,7 +22,7 @@
     </nav>
     <div class="d-flex min-vh-100">
         @include('layouts.navs')
-        <main class="flex-grow-1 p-3" id="main-content">
+        <main class="flex-grow-1 p-3 font-mono" id="main-content">
             @yield('content')
         </main>
     </div>

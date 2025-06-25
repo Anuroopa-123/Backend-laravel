@@ -1,118 +1,103 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-9">
-      <h1>Workshop Poster</h1>
-      <img src="{{ url('/').'/'.$workshopPoster->image }}" alt="Workshop Poster">
-    </div>
-    <div class="col-md-3 d-flex flex-column align-items-end">
-      <div class="timeline-container w-100">
-        <div class="main-timeline-5 overflow-auto">
-          @foreach ($timelines as $timeline)
-            <div class="timeline-5 right-5 mb-4">
-              <div class="card">
-                <div class="card-body p-3">
-                  <h5 class="mb-1">{{ array_key_exists("course_title", $timeline) ? $timeline["course_title"] : $timeline["title"] }}</h5>
-                  <span class="small text-muted">
-                    <i class="fas fa-clock me-1"></i>
-                    {{ array_key_exists("start_date", $timeline) ? $timeline["start_date"] : $timeline["date"] }}
-                  </span>
-                  <p class="mt-2 mb-0">
-                    {{ array_key_exists("course_title", $timeline) ? $timeline["course_title"] : $timeline["description"] }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          @endforeach
-        </div>
-      </div>
+<h1 class="pb-3 text-center">Dashboard</h1>
+<hr>
+<div class="container d-flex flex-wrap gap-4 justify-content-start align-items-start mt-4">
+  <div class="rounded-2xl overflow-hidden shadow-lg" style="min-width:320px; max-width:400px; flex: 0 1 350px;">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2 text-center">Users</div>
+      <hr>
+      @foreach($users as $user)
+        <p class="text-gray-700 text-lg d-flex justify-between">
+          {{ $user->email }} 
+          <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-success">
+            <i class="bi bi-vector-pen pr-1"></i>Change
+          </a>
+        </p>
+      @endforeach
     </div>
   </div>
+  <div class="rounded-2xl overflow-hidden shadow-lg" style="min-width:320px; max-width:400px; flex: 0 1 350px;">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2 text-center">Categories</div>
+      <hr>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Entrepreneurships 
+        <a href="{{ route('entrepreneurship.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Events 
+        <a href="{{ route('events.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Hackathons
+        <a href="{{ route('hackathons.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Jobs 
+        <a href="{{ route('jobs.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Media Categories 
+        <a href="{{ route('mediaCategories.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Media Items
+        <a href="{{ route('mediaItems.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        News
+        <a href="{{ route('news.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Sliders
+        <a href="{{ route('sliders.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+      <p class="text-gray-700 text-lg d-flex justify-between">
+        Workshops
+        <a href="{{ route('workshops.create') }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus-circle pr-1"></i>Add
+        </a>
+      </p>
+    </div>
+  </div>
+  <div style="min-width:340px; max-width:400px; flex: 1 1 350px; max-height: 600px; overflow-y: auto;">
+    <ol
+      class="relative space-y-8 before:absolute before:-ml-px before:h-full before:w-0.5 before:rounded-full before:bg-gray-200"
+    >
+      @foreach ($timeline as $data)
+        <li class="relative -ms-1.5 flex items-start gap-4">
+          <span class="size-3 shrink-0 rounded-full bg-blue-600"></span>
+
+          <div class="-mt-2">
+            <time class="text-xs/none font-medium text-gray-700">{{ $data->created_at->format('d-m-Y h:m:s') }}</time>
+
+            <h3 class="text-lg font-bold text-gray-900">{{ $data->event }}</h3>
+
+            <p class="mt-0.5 text-sm text-gray-700">
+              {{ $data->operation }}
+            </p>
+          </div>
+        </li>
+      @endforeach
+    </ol>
+  </div>
 </div>
-
-@endsection
-
-@section('styles')
-
-<style>
-
-.timeline-container {
-  font-size: 0.95rem;
-  padding: 0.5rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  min-width: 220px;
-  max-width: 320px;
-  width: 100%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.main-timeline-5 {
-  position: relative;
-  margin: 0;
-  padding: 0 0 0 20px;
-}
-
-.main-timeline-5::after {
-  content: "";
-  position: absolute;
-  width: 3px;
-  background-color: #000;
-  top: 0;
-  bottom: 0;
-  left: 10px;
-}
-
-.timeline-5 {
-  position: relative;
-  background-color: inherit;
-  width: 100%;
-}
-
-.timeline-5::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  left: 3px;
-  background-color: #000;
-  top: 22px;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.timeline-5 .card {
-  margin-left: 30px;
-  min-width: 0;
-  max-width: 100%;
-}
-
-.timeline-5.right-5::before {
-  content: "";
-  position: absolute;
-  top: 28px;
-  left: 24px;
-  border: solid transparent;
-  border-width: 8px 8px 8px 0;
-  border-right-color: #fff;
-  z-index: 2;
-}
-
-@media (max-width: 991px) {
-  .timeline-container {
-    max-width: 100%;
-    min-width: 0;
-  }
-  .main-timeline-5 {
-    padding-left: 10px;
-  }
-  .timeline-5 .card {
-    margin-left: 20px;
-  }
-}
-</style>
-
 @endsection
