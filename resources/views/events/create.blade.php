@@ -73,7 +73,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 <script>
   tinymce.init({
     selector: 'textarea#editor',

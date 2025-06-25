@@ -63,7 +63,6 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('is_published_checkbox');
