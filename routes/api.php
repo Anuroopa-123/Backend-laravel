@@ -9,7 +9,7 @@ Route::get('/entrepreneurships',[FrontendResourceController::class, 'entrepreneu
 Route::get('/events',[FrontendResourceController::class, 'events']);
 Route::get('/hackathons',[FrontendResourceController::class, 'hackathons']);
 Route::get('/jobs',[FrontendResourceController::class, 'jobs']);
-Route::get('media-categories',[FrontendResourceController::class, 'mediaCategories']);
+Route::get('/media-categories',[FrontendResourceController::class, 'mediaCategories']);
 Route::get('/media-items',[FrontendResourceController::class, 'mediaItems']);
 Route::get('/news',[FrontendResourceController::class, 'news']);
 Route::get('/sliders',[FrontendResourceController::class, 'sliders']);
