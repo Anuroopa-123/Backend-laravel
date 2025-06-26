@@ -1,5 +1,5 @@
 <div class="d-none d-lg-flex flex-column flex-shrink-0 p-3 font-mono"
-     style="width: 280px; height: 100vh; overflow-y: auto; position: fixed; left: 0; top: 0; z-index: 1040; background-color: rgb(9, 82, 150); color: rgb(243, 229, 171);"
+     style="width: 280px; height: 100vh; overflow-y: auto; position: fixed; left: 0; top: 0; z-index: 1040; background-color: var(--tansam-footer-blue); color: rgb(243, 229, 171);"
     >
     <div class="header d-flex justify-center align-tems-center">
         <img src="{{ asset('tansam_logo.png') }}" alt="Logo" class="w-12 h-12 mr-2">
@@ -15,7 +15,7 @@
         <li class="nav-item mb-2">
             <button id="cmsAccordionBtn"
                 class="btn w-100 text-start text-white px-3 py-2 fw-bold d-flex align-items-center justify-content-between"
-                style="background-color: rgb(9, 82, 150);"
+                style="background-color: var(--tansam-footer-blue);"
                 type="button" aria-expanded="false">
                 <span><i class="bi bi-grid-1x2-fill me-2"></i> CMS</span>
                 <i id="cmsAccordionIcon" class="bi bi-chevron-right transition-all duration-300"></i>
