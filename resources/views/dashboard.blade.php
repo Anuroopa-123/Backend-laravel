@@ -79,25 +79,29 @@
     </div>
   </div>
   <div style="min-width:340px; max-width:400px; flex: 1 1 350px; max-height: 600px; overflow-y: auto;">
-    <ol
-      class="relative space-y-8 before:absolute before:-ml-px before:h-full before:w-0.5 before:rounded-full before:bg-gray-200"
-    >
-      @foreach ($timeline as $data)
-        <li class="relative -ms-1.5 flex items-start gap-4">
-          <span class="size-3 shrink-0 rounded-full bg-blue-600"></span>
+    @if ($timeline->count())
+      <ol
+        class="relative space-y-8 before:absolute before:-ml-px before:h-full before:w-0.5 before:rounded-full before:bg-gray-200"
+      >
+        @foreach ($timeline as $data)
+          <li class="relative -ms-1.5 flex items-start gap-4">
+            <span class="size-3 shrink-0 rounded-full bg-blue-600"></span>
 
-          <div class="-mt-2">
-            <time class="text-xs/none font-medium text-gray-700">{{ $data->created_at->format('d-m-Y h:m:s') }}</time>
+            <div class="-mt-2">
+              <time class="text-xs/none font-medium text-gray-700">{{ $data->created_at->format('d-m-Y h:m:s') }}</time>
 
-            <h3 class="text-lg font-bold text-gray-900">{{ $data->event }}</h3>
+              <h3 class="text-lg font-bold text-gray-900">{{ $data->event }}</h3>
 
-            <p class="mt-0.5 text-sm text-gray-700">
-              {{ $data->operation }}
-            </p>
-          </div>
-        </li>
-      @endforeach
-    </ol>
+              <p class="mt-0.5 text-sm text-gray-700">
+                {{ $data->operation }}
+              </p>
+            </div>
+          </li>
+        @endforeach
+      </ol>
+    @else
+      <h4 class="text-center">No timeline records</h4>
+    @endif
   </div>
 </div>
 @endsection

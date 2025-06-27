@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th data-field="id" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="Enter ID">ID</th>
+                <th data-field="role" data-sortable="true" data-filter-control="select" data-filter-control-placeholder="Select Role">Role</th>
                 <th data-field="name" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="Enter Name">Name</th>
                 <th data-field="email" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="Enter Email">Email</th>
                 <th data-field="contact_number" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="Enter Contact">Contact</th>
@@ -26,6 +27,7 @@
             @foreach($jobApplications as $app)
             <tr>
                 <td>{{ $app->id }}</td>
+                <td>{{ $app->role }}</td>
                 <td>{{ $app->name }}</td>
                 <td>{{ $app->email }}</td>
                 <td>{{ $app->contact_number }}</td>

@@ -13,6 +13,7 @@
         "laravel/pail": "^1.2",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
+        "mews/purifier": "^3.4",
         "tinymce/tinymce": "^7.9"
     },
     "require-dev": {
