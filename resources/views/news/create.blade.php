@@ -16,6 +16,12 @@
     <form method="POST" action="{{ route('news.add') }}" enctype="multipart/form-data">
         @csrf
         <div class="row">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Title *</label>
+                <input name="title" type="text" value="{{ old('title') }}" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Date *</label>
                 <input name="date" type="date" value="{{ old('date') }}" required class="form-control">

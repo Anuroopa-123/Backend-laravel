@@ -12,4 +12,9 @@ class MediaItem extends Model
         'title',
         'is_published',
     ];
+
+    public function getImageAttribute($value)
+    {
+        return url($value);
+    }
 }

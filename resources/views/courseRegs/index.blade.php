@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th data-field="id" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="Enter ID">ID</th>
+                <th data-field="course" data-sortable="true" data-filter-control="select" data-filter-control-placeholder="Select Course">Course</th>
                 <th data-field="name" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="Enter Name">Name</th>
                 <th data-field="dob" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="YYYY-MM-DD">DOB</th>
                 <th data-field="mobile_number" data-sortable="true" data-filter-control="input" data-filter-control-placeholder="Mobile Number">Mobile Number</th>
@@ -32,6 +33,7 @@
             @foreach($courseRegs as $courseReg)
                 <tr>
                     <td>{{ $courseReg->id }}</td>
+                    <td>{{ $courseReg->course }}</td>
                     <td>{{ $courseReg->name }}</td>
                     <td>{{ $courseReg->dob }}</td>
                     <td>{{ $courseReg->mobile_number }}</td>

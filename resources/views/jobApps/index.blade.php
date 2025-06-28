@@ -43,7 +43,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body" style="height:80vh;">
-                            <iframe src="{{ url("/jobApplications/{$app->id}/resume") }}" width="100%" height="100%" style="border:none;"></iframe>
+                            <iframe 
+                                data-src="{{ url("/jobApplications/{$app->id}/resume") }}" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:none;">
+                            </iframe>
                           </div>
                         </div>
                       </div>
@@ -111,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(res => res.json())
             .then(data => {
                 if(data.success) {
-                    const badge = e.target.closest('tr').querySelector('td:nth-child(6) span');
+                    const badge = e.target.closest('tr').querySelector('td:nth-child(7) span');
                     let color = 'badge bg-secondary', label = status.charAt(0).toUpperCase() + status.slice(1);
                     if (status === 'applied' || status === 'waiting list') color = 'badge bg-warning text-dark';
                     if (status === 'shortlisted') color = 'badge bg-success';
@@ -122,6 +127,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Status update failed');
                 }
             });
+        }
+    });
+
+    // Use event delegation for modal events
+    document.addEventListener('show.bs.modal', function (event) {
+        const modal = event.target;
+        const iframe = modal.querySelector('iframe');
+        if (iframe && !iframe.src) {
+            iframe.src = iframe.getAttribute('data-src');
+        }
+    });
+
+    document.addEventListener('hidden.bs.modal', function (event) {
+        const modal = event.target;
+        const iframe = modal.querySelector('iframe');
+        if (iframe) {
+            iframe.src = '';
         }
     });
 });

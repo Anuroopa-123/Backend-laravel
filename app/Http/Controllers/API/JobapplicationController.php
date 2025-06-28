@@ -11,20 +11,20 @@ class JobapplicationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'role' => 'required|string',
-            'name' => 'required|string',
+            'job' => 'required|string',
+            'full_name' => 'required|string',
             'email' => 'required|email',
-            'contact_number' => 'required|string',
+            'contact' => 'required|string',
             'resume' => 'required|mimes:pdf'
         ]);
 
         $resumePath = $request->file('resume')->storeAs('resumes',time().'_'.$request->file('resume')->getClientOriginalName());
 
         JobApplication::create([
-            'role' => $request->role,
-            'name' => $request->name,
+            'role' => $request->job,
+            'name' => $request->full_name,
             'email' => $request->email,
-            'contact_number' => $request->contact_number,
+            'contact_number' => $request->contact,
             'resume' => $resumePath
         ]);
 

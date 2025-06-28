@@ -33,6 +33,7 @@ class CourseRegistrationController extends Controller
         ]);
 
         CourseRegistration::create([
+            'course' => $request->course,
             'name' => $request->name,
             'dob' => $request->dob,
             'mobile_number' => $request->mobile_number,

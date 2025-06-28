@@ -17,6 +17,12 @@
         @csrf
         @method('PATCH')
         <div class="row">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Title *</label>
+                <input name="title" type="text" value="{{ old('title', $news->title) }}" required class="form-control">
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-bold">Date *</label>
                 <input name="date" type="date" value="{{ old('date', $news->date) }}" required class="form-control">

@@ -22,6 +22,7 @@ class NewsController extends Controller
     public function add(Request $request)
     {
         $request->validate([
+            'title' => 'required|string',
             'news_image' => 'required|image|mimes:jpg,png,jpeg,gif',
             'description' => 'required|string',
             'date' => 'required|date',
@@ -39,6 +40,7 @@ class NewsController extends Controller
         }
 
         $news = News::create([
+            'title' => $request->title,
             'news_image' => $imagePath,
             'description' => $request->description,
             'date' => $request->date,
@@ -59,6 +61,7 @@ class NewsController extends Controller
     public function edit(Request $request, $id)
     {
         $request->validate([
+            'title' => 'required|string',
             'news_image' => 'nullable|mimes:jpg,png,jpeg,gif',
             'description' => 'required|string',
             'date' => 'required|date',
@@ -81,6 +84,7 @@ class NewsController extends Controller
         }
 
         $news->update([
+            'title' => $request->title,
             'news_image' => $imagePath,
             'description' => $request->description,
             'date' => $request->date,

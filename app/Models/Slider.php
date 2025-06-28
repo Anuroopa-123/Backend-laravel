@@ -11,4 +11,9 @@ class Slider extends Model
         'slider_title',
         'is_published',
     ];
+
+    public function getSliderImageAttribute($value)
+    {
+        return url($value);
+    }
 }

@@ -18,4 +18,9 @@ class HackathonImage extends Model
     {
         return $this->belongsTo(Hackathon::class);
     }
+
+    public function getImagePathAttribute($value)
+    {
+        return url($value);
+    }
 }

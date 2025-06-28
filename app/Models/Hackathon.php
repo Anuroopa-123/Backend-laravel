@@ -18,4 +18,9 @@ class Hackathon extends Model
     {
         return $this->hasMany(HackathonImage::class,'hackathon_id','id');
     }
+
+    public function getImageAttribute($value)
+    {
+        return url($value);
+    }
 }

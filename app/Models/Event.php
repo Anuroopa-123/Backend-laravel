@@ -14,4 +14,9 @@ class Event extends Model
         'category',
         'is_published'
     ];
+
+    public function getImageAttribute($value)
+    {
+        return url($value);
+    }
 }

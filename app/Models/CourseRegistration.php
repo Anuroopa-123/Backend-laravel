@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CourseRegistration extends Model
 {
     protected $fillable = [
+        'course',
         'name',
         'dob',
         'mobile_number',

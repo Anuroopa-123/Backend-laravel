@@ -18,4 +18,9 @@ class Entrepreneurship extends Model
         'contact_mail',
         'is_published'
     ];
+
+    public function getCourseImageAttribute($value)
+    {
+        return url($value);
+    }
 }

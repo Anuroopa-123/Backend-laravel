@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hackathon_images', function (Blueprint $table) {
+        Schema::create('contactuses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('hackathon_id');
-            $table->string('image');
+            $table->text('message');
+            $table->string('name');
+            $table->string('email');
             $table->timestamps();
-
-            $table->foreign('hackathon_id')->references('id')->on('hackathons')->onDelete('cascade');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hackathon_images');
+        Schema::dropIfExists('contactuses');
     }
 };

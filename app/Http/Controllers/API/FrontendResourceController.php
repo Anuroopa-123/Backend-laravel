@@ -17,55 +17,61 @@ class FrontendResourceController extends Controller
 {
     public function entrepreneurships()
     {
-        $result = Entrepreneurship::all()->toArray();
+        $result = Entrepreneurship::where('is_published', true)
+                                    ->orderBy('created_at','desc')
+                                    ->get()->toArray();
         return $result;
     }
 
-    public function events()
+    public function events($category)
     {
-        $result = Event::all()->toArray();
+        $result = Event::where('is_published', true)
+                        ->where('category',$category)
+                        ->get()->toArray();
         return $result;
     }
 
     public function hackathons()
     {
-        $result = Hackathon::with('showcaseImages')->get();
+        $result = Hackathon::where('is_published', true)->with('showcaseImages')->get();
         return $result;
     }
 
     public function jobs()
     {
-        $result = Job::all()->toArray();
+        $result = Job::where('is_published', true)->get()->toArray();
         return $result;
     }
 
     public function mediaCategories()
     {
-        $result = MediaCategory::all()->toArray();
+        $result = MediaCategory::where('is_published', true)->get()->toArray();
         return $result;
     }
 
-    public function mediaItems()
+    public function mediaItems($category)
     {
-        $result = MediaItem::all()->toArray();
+        $result = MediaItem::where('is_published', true)
+                            ->where('category',$category)
+                            ->get()->toArray();
         return $result;
     }
 
     public function news()
     {
-        $result = News::all()->toArray();
+        $result = News::where('is_published', true)->get()->toArray();
         return $result;
     }
 
     public function sliders()
     {
-        $result = Slider::all()->toArray();
+        $result = Slider::where('is_published', true)->get()->toArray();
         return $result;
     }
 
     public function workshops()
     {
-        $result = Workshop::all()->toArray();
+        $result = Workshop::where('is_published', true)->get()->toArray();
         return $result;
     }
 }
