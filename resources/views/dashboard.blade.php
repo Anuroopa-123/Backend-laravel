@@ -85,7 +85,7 @@
                 <p class="text-gray-700 text-lg d-flex justify-between">
                     Internships
                     <a href="{{ route('internships.list') }}" class="btn btn-sm btn-success">
-                        <i class="bi bi-chat-dots-fill pr-1"></i>View
+                        <i class="bi bi-chat-dots-fill pr-1"></i>Add
                     </a>
                 </p>
 
