@@ -1,28 +1,25 @@
 <div class="d-none d-lg-flex flex-column flex-shrink-0 p-3 font-mono"
-     style="width: 280px; height: 100vh; overflow-y: auto; position: fixed; left: 0; top: 0; z-index: 1040; background-color: var(--tansam-footer-blue); color: rgb(243, 229, 171);"
-    >
+    style="width: 280px; height: 100vh; overflow-y: auto; position: fixed; left: 0; top: 0; z-index: 1040; background-color: var(--tansam-footer-blue); color: rgb(243, 229, 171);">
     <div class="header d-flex justify-center align-tems-center">
         <img src="{{ asset('tansam_logo.png') }}" alt="Logo" class="w-12 h-12 mr-2">
         <h3 class="pt-2">TANSAM CMS</h3>
     </div>
     <hr>
-    <a class="px-3 py-2 nav-link text-white fw-bold mb-2 d-flex align-tems-center justify-content-between" href="{{ route('users.show') }}">
+    <a class="px-3 py-2 nav-link text-white fw-bold mb-2 d-flex align-tems-center justify-content-between"
+        href="{{ route('users.show') }}">
         <span><i class="bi bi-people-fill"></i>
-                Users
+            Users
         </span>
     </a>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item mb-2">
             <button id="cmsAccordionBtn"
                 class="btn w-100 text-start text-white px-3 py-2 fw-bold d-flex align-items-center justify-content-between"
-                style="background-color: var(--tansam-footer-blue);"
-                type="button" aria-expanded="false">
+                style="background-color: var(--tansam-footer-blue);" type="button" aria-expanded="false">
                 <span><i class="bi bi-grid-1x2-fill me-2"></i> CMS</span>
                 <i id="cmsAccordionIcon" class="bi bi-chevron-right transition-all duration-300"></i>
             </button>
-            <div id="cmsAccordionContent"
-                class="overflow-hidden transition-all duration-500"
-                style="max-height: 0;">
+            <div id="cmsAccordionContent" class="overflow-hidden transition-all duration-500" style="max-height: 0;">
                 <ul class="list-unstyled ms-2 mt-2">
                     <li>
                         <a href="{{ route('dashboard') }}" class="nav-link text-white py-2">
@@ -79,11 +76,24 @@
                             <i class="bi bi-people-fill me-2"></i> Workshops
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('internships.list') }}" class="nav-link text-white py-2">
+                            <i class="bi bi-journal-code me-2"></i> Internships
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('feedback.list') }}" class="nav-link text-white py-2">
+                            <i class="bi bi-chat-dots-fill me-2"></i> Feedback
+                        </a>
+                    </li>
+
+
                 </ul>
             </div>
         </li>
         <li class="nav-item mt-1">
-            <a href="{{ route('courseRegs.show') }}" class="nav-link text-white py-2 px-3 fw-bold d-flex align-items-center">
+            <a href="{{ route('courseRegs.show') }}"
+                class="nav-link text-white py-2 px-3 fw-bold d-flex align-items-center">
                 <i class="bi bi-journal-check me-2"></i> Course Registration
             </a>
         </li>
